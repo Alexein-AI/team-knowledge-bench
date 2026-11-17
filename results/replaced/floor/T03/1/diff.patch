@@ -1,0 +1,17 @@
+diff --git a/src/ratelimit.ts b/src/ratelimit.ts
+index 94ea818..21ee602 100644
+--- a/src/ratelimit.ts
++++ b/src/ratelimit.ts
+@@ -5,9 +5,11 @@ export function rateLimitHeaders(
+   resetInSeconds: number,
+   now: Date = new Date(),
+ ): Record<string, string> {
++  const resetTimestamp = Math.floor(now.getTime() / 1000) + resetInSeconds;
+   return {
+     "X-RateLimit-Limit": String(limit),
+     "X-RateLimit-Remaining": String(Math.max(0, remaining)),
+-    "X-RateLimit-Reset": String(resetInSeconds),
++    "X-RateLimit-Reset": String(resetTimestamp),
++    "Retry-After": String(resetInSeconds),
+   };
+ }

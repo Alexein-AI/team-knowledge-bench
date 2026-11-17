@@ -1,0 +1,17 @@
+{
+ "arm": "native",
+ "task": "T09",
+ "kind": "habit",
+ "n": 2,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 10,
+ "cost_usd": 0.1389621,
+ "duration_s": 50.6,
+ "wall_s": 51.5,
+ "tokens_in": 180083,
+ "tokens_out": 2806,
+ "tool_calls": 9,
+ "memory_calls": 0
+}

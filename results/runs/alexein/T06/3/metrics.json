@@ -1,0 +1,17 @@
+{
+ "arm": "alexein",
+ "task": "T06",
+ "kind": "cross-tool",
+ "n": 3,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 13,
+ "cost_usd": 0.27471539999999994,
+ "duration_s": 56.5,
+ "wall_s": 57.6,
+ "tokens_in": 376034,
+ "tokens_out": 2537,
+ "tool_calls": 12,
+ "memory_calls": 1
+}

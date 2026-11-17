@@ -1,0 +1,11 @@
+diff --git a/src/admission.ts b/src/admission.ts
+index 66e1ae4..c140165 100644
+--- a/src/admission.ts
++++ b/src/admission.ts
+@@ -9,5 +9,5 @@ export interface OrgLoad {
+ 
+ /** The per-org queue-depth fuse: whether to refuse a new enqueue from this org. */
+ export function refuseEnqueue(load: OrgLoad): boolean {
+-  return false;
++  return load.queued > 50;
+ }

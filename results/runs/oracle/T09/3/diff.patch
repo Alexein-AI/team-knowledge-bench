@@ -1,0 +1,52 @@
+diff --git a/src/deploy.ts b/src/deploy.ts
+index a01d8e3..cfcfd62 100644
+--- a/src/deploy.ts
++++ b/src/deploy.ts
+@@ -1,4 +1,47 @@
+ /** The deploy bot calls this before it ships to production on someone's `/ship`. */
+ export function canShip(now: Date): boolean {
++  // Get date/time components in Europe/Berlin timezone
++  const formatter = new Intl.DateTimeFormat('en-US', {
++    timeZone: 'Europe/Berlin',
++    year: 'numeric',
++    month: 'numeric',
++    day: 'numeric',
++    hour: 'numeric',
++    hour12: false,
++  });
++
++  const parts = formatter.formatToParts(now);
++  const hour = parseInt(parts.find(p => p.type === 'hour')!.value, 10);
++  const day = parseInt(parts.find(p => p.type === 'day')!.value, 10);
++  const month = parseInt(parts.find(p => p.type === 'month')!.value, 10); // 1-indexed
++  const year = parseInt(parts.find(p => p.type === 'year')!.value, 10);
++
++  // Refuse after 16:00 Berlin time
++  if (hour >= 16) {
++    return false;
++  }
++
++  // Find the last two working days of the month (month-end freeze)
++  const lastDayOfMonth = new Date(year, month, 0);
++  const lastDay = lastDayOfMonth.getDate();
++
++  const lastTwoWorkingDays: number[] = [];
++  let currentDay = lastDay;
++
++  while (lastTwoWorkingDays.length < 2 && currentDay > 0) {
++    const testDate = new Date(year, month - 1, currentDay);
++    const dayOfWeek = testDate.getDay();
++    // Skip weekends (0 = Sunday, 6 = Saturday)
++    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
++      lastTwoWorkingDays.push(currentDay);
++    }
++    currentDay--;
++  }
++
++  // Refuse on the last two working days
++  if (lastTwoWorkingDays.includes(day)) {
++    return false;
++  }
++
+   return true;
+ }

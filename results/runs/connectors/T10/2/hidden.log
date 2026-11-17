@@ -1,0 +1,10 @@
+✔ an audit entry names who did what and when, and never carries the credential (1.201541ms)
+✔ audit.ts sends nothing anywhere (0.14975ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.478542

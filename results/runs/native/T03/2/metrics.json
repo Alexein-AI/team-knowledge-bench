@@ -1,0 +1,17 @@
+{
+ "arm": "native",
+ "task": "T03",
+ "kind": "said-once",
+ "n": 2,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 13,
+ "cost_usd": 0.12123300000000001,
+ "duration_s": 43.0,
+ "wall_s": 44.0,
+ "tokens_in": 125620,
+ "tokens_out": 2289,
+ "tool_calls": 12,
+ "memory_calls": 0
+}

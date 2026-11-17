@@ -1,0 +1,17 @@
+{
+ "arm": "native",
+ "task": "T06",
+ "kind": "cross-tool",
+ "n": 3,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 10,
+ "cost_usd": 0.0924204,
+ "duration_s": 33.3,
+ "wall_s": 34.2,
+ "tokens_in": 98715,
+ "tokens_out": 1643,
+ "tool_calls": 9,
+ "memory_calls": 0
+}

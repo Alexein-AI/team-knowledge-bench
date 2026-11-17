@@ -1,0 +1,17 @@
+{
+ "arm": "floor",
+ "task": "T05",
+ "kind": "cross-tool",
+ "n": 3,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 8,
+ "cost_usd": 0.08479170000000001,
+ "duration_s": 24.2,
+ "wall_s": 25.2,
+ "tokens_in": 131629,
+ "tokens_out": 1033,
+ "tool_calls": 7,
+ "memory_calls": 0
+}

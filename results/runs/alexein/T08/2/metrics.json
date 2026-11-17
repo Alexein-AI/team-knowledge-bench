@@ -1,0 +1,17 @@
+{
+ "arm": "alexein",
+ "task": "T08",
+ "kind": "superseded",
+ "n": 2,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 9,
+ "cost_usd": 0.18856169999999997,
+ "duration_s": 44.9,
+ "wall_s": 46.1,
+ "tokens_in": 229425,
+ "tokens_out": 1881,
+ "tool_calls": 8,
+ "memory_calls": 1
+}

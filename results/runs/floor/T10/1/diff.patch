@@ -1,0 +1,22 @@
+diff --git a/src/audit.ts b/src/audit.ts
+index 660294a..3ac4083 100644
+--- a/src/audit.ts
++++ b/src/audit.ts
+@@ -11,5 +11,16 @@ export interface AuditEntry {
+ 
+ /** One audit entry for an admin action, as stored for the SOC 2 evidence. */
+ export function auditEntry(req: AdminRequest, action: string, now: Date = new Date()): AuditEntry {
+-  return {};
++  return {
++    timestamp: now.toISOString(),
++    actor: req.actor,
++    action,
++    method: req.method,
++    path: req.path,
++    ip: req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
++        req.headers['x-real-ip'] ||
++        req.headers['cf-connecting-ip'] ||
++        'unknown',
++    userAgent: req.headers['user-agent'] || 'unknown',
++  };
+ }

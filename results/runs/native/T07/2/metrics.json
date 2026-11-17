@@ -1,0 +1,17 @@
+{
+ "arm": "native",
+ "task": "T07",
+ "kind": "superseded",
+ "n": 2,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 7,
+ "cost_usd": 0.1053027,
+ "duration_s": 33.4,
+ "wall_s": 34.4,
+ "tokens_in": 137549,
+ "tokens_out": 1807,
+ "tool_calls": 6,
+ "memory_calls": 0
+}

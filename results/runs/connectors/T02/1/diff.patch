@@ -1,0 +1,11 @@
+diff --git a/src/fairshare.ts b/src/fairshare.ts
+index ffd8272..483c5b8 100644
+--- a/src/fairshare.ts
++++ b/src/fairshare.ts
+@@ -17,5 +17,5 @@ export function weightFor(org: string, rows: PlanRow[]): number {
+ /** How many machines an org is owed right now, given every queued org's weight. */
+ export function shareOf(weight: number, totalWeight: number, fleet: number): number {
+   if (totalWeight <= 0) return 0;
+-  return Math.floor((weight * fleet) / totalWeight);
++  return Math.round((weight * fleet) / totalWeight);
+ }

@@ -1,0 +1,17 @@
+{
+ "arm": "oracle",
+ "task": "T09",
+ "kind": "habit",
+ "n": 2,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 15,
+ "cost_usd": 0.3337932000000001,
+ "duration_s": 136.7,
+ "wall_s": 137.7,
+ "tokens_in": 312482,
+ "tokens_out": 9841,
+ "tool_calls": 14,
+ "memory_calls": 0
+}

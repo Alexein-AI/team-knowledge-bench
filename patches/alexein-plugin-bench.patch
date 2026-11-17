@@ -1,0 +1,31 @@
+diff --git a/plugins/alexein/.mcp.json b/plugins/alexein/.mcp.json
+deleted file mode 100644
+index 8d7b756..0000000
+--- a/plugins/alexein/.mcp.json
++++ /dev/null
+@@ -1,8 +0,0 @@
+-{
+-  "mcpServers": {
+-    "alexein": {
+-      "type": "http",
+-      "url": "https://api.alexein.ai/v1/mcp"
+-    }
+-  }
+-}
+diff --git a/plugins/alexein/scripts/alexein_hooks.py b/plugins/alexein/scripts/alexein_hooks.py
+index 2c62a9d..ef82b7d 100644
+--- a/plugins/alexein/scripts/alexein_hooks.py
++++ b/plugins/alexein/scripts/alexein_hooks.py
+@@ -117,9 +117,9 @@ class Config:
+     def __init__(self, env: dict[str, str] | None = None, data: str | None = None) -> None:
+         env = dict(os.environ) if env is None else env
+         self.env = env
+-        self.key = (env.get("CLAUDE_PLUGIN_OPTION_API_KEY") or "").strip()
+-        self.capture = _flag(env.get("CLAUDE_PLUGIN_OPTION_CAPTURE"), True)
+-        api = (env.get("CLAUDE_PLUGIN_OPTION_API_URL") or "").strip().rstrip("/")
++        self.key = (env.get("BENCH_ALEXEIN_API_KEY") or env.get("CLAUDE_PLUGIN_OPTION_API_KEY") or "").strip()
++        self.capture = False if env.get("BENCH_ALEXEIN_API_KEY") else _flag(env.get("CLAUDE_PLUGIN_OPTION_CAPTURE"), True)
++        api = (env.get("BENCH_ALEXEIN_API_URL") or env.get("CLAUDE_PLUGIN_OPTION_API_URL") or "").strip().rstrip("/")
+         self.api = api or DEFAULT_API
+         self.api_ok = _usable_api(self.api)
+         self.data = Path(data or env.get("CLAUDE_PLUGIN_DATA") or _default_data())

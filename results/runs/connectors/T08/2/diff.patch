@@ -1,0 +1,24 @@
+diff --git a/src/boot.ts b/src/boot.ts
+index 5eabcf6..6e66ea3 100644
+--- a/src/boot.ts
++++ b/src/boot.ts
+@@ -1,5 +1,3 @@
+-export type ColdStart = "warm-pool" | "prebaked";
+-
+ export interface Runner {
+   id: string;
+   image: string;
+@@ -9,13 +7,3 @@ export interface Runner {
+ export async function claimFromWarmPool(pool: Runner[]): Promise<Runner | undefined> {
+   return pool.shift();
+ }
+-
+-/** Boot a fresh machine from the prebaked image for this toolchain. */
+-export async function bootPrebakedImage(image: string): Promise<Runner> {
+-  return { id: `r-${Math.random().toString(36).slice(2, 8)}`, image };
+-}
+-
+-/** Which cold-start path a new job takes. */
+-export function chooseColdStart(): ColdStart {
+-  throw new Error("not decided");
+-}

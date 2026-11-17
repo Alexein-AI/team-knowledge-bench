@@ -1,0 +1,70 @@
+diff --git a/src/deploy.ts b/src/deploy.ts
+index a01d8e3..4be3f0f 100644
+--- a/src/deploy.ts
++++ b/src/deploy.ts
+@@ -1,4 +1,65 @@
+ /** The deploy bot calls this before it ships to production on someone's `/ship`. */
+ export function canShip(now: Date): boolean {
++  // No deploys after 16:00 Berlin time
++  const berlinHour = getBerlinHour(now);
++  if (berlinHour >= 16) {
++    return false;
++  }
++
++  // No deploys on last two working days of month (month-end freeze)
++  if (isMonthEndFreeze(now)) {
++    return false;
++  }
++
+   return true;
+ }
++
++function getBerlinHour(date: Date): number {
++  const formatter = new Intl.DateTimeFormat('en-US', {
++    timeZone: 'Europe/Berlin',
++    hour: 'numeric',
++    hour12: false
++  });
++  return parseInt(formatter.format(date));
++}
++
++function isMonthEndFreeze(date: Date): boolean {
++  // Get the current day info in Berlin time
++  const formatter = new Intl.DateTimeFormat('en-US', {
++    timeZone: 'Europe/Berlin',
++    year: 'numeric',
++    month: 'numeric',
++    day: 'numeric',
++  });
++
++  const parts = formatter.formatToParts(date);
++  const year = parseInt(parts.find(p => p.type === 'year')!.value);
++  const month = parseInt(parts.find(p => p.type === 'month')!.value); // 1-indexed
++  const day = parseInt(parts.find(p => p.type === 'day')!.value);
++
++  // Find last day of month
++  const lastDay = new Date(year, month, 0).getDate();
++
++  // Find last two working days of the month
++  const lastTwoWorkingDays: number[] = [];
++
++  for (let d = lastDay; d >= 1 && lastTwoWorkingDays.length < 2; d--) {
++    // Check what day of week this is in Berlin timezone
++    const checkDate = new Date(Date.UTC(year, month - 1, d, 12, 0, 0));
++    const dayOfWeek = getDayOfWeekBerlin(checkDate);
++
++    if (dayOfWeek !== 'Sat' && dayOfWeek !== 'Sun') {
++      lastTwoWorkingDays.push(d);
++    }
++  }
++
++  return lastTwoWorkingDays.includes(day);
++}
++
++function getDayOfWeekBerlin(date: Date): string {
++  const formatter = new Intl.DateTimeFormat('en-US', {
++    timeZone: 'Europe/Berlin',
++    weekday: 'short'
++  });
++  return formatter.format(date);
++}

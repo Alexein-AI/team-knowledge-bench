@@ -1,0 +1,17 @@
+{
+ "arm": "oracle",
+ "task": "T07",
+ "kind": "superseded",
+ "n": 2,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 8,
+ "cost_usd": 0.10827779999999998,
+ "duration_s": 30.3,
+ "wall_s": 31.4,
+ "tokens_in": 138977,
+ "tokens_out": 1870,
+ "tool_calls": 7,
+ "memory_calls": 0
+}

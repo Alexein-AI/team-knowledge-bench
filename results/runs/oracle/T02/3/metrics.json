@@ -1,0 +1,17 @@
+{
+ "arm": "oracle",
+ "task": "T02",
+ "kind": "said-once",
+ "n": 3,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 4,
+ "cost_usd": 0.06715589999999999,
+ "duration_s": 19.0,
+ "wall_s": 20.0,
+ "tokens_in": 76373,
+ "tokens_out": 950,
+ "tool_calls": 3,
+ "memory_calls": 0
+}

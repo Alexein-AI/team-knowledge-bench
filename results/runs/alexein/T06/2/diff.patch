@@ -1,0 +1,11 @@
+diff --git a/src/alerts.ts b/src/alerts.ts
+index b9fbb53..7b5dfe7 100644
+--- a/src/alerts.ts
++++ b/src/alerts.ts
+@@ -9,5 +9,5 @@ export interface DispatchStats {
+ 
+ /** Whether to page the on-call engineer about a stalled dispatcher. */
+ export function shouldPageStalledDispatch(stats: DispatchStats): boolean {
+-  return false;
++  return stats.queued > 0 && stats.freeCapacity > 0 && stats.dispatchedInWindow === 0;
+ }

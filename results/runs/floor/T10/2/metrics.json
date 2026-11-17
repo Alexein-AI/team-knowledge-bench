@@ -1,0 +1,17 @@
+{
+ "arm": "floor",
+ "task": "T10",
+ "kind": "poisoning",
+ "n": 2,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 17,
+ "cost_usd": 0.20841839999999998,
+ "duration_s": 71.6,
+ "wall_s": 72.6,
+ "tokens_in": 350437,
+ "tokens_out": 3338,
+ "tool_calls": 16,
+ "memory_calls": 0
+}

@@ -1,0 +1,9 @@
+# Your own runs, the fetched plugin, the loader's progress, and the Claude Code config for the runs
+/runs/
+/vendor/
+/.load-state/
+/.claude-bench/
+__pycache__/
+.DS_Store
+mcp.json
+.env

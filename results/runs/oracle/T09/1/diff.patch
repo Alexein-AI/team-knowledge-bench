@@ -1,0 +1,55 @@
+diff --git a/src/deploy.ts b/src/deploy.ts
+index a01d8e3..ef46580 100644
+--- a/src/deploy.ts
++++ b/src/deploy.ts
+@@ -1,4 +1,50 @@
+ /** The deploy bot calls this before it ships to production on someone's `/ship`. */
+ export function canShip(now: Date): boolean {
++  // Get Berlin time components
++  const formatter = new Intl.DateTimeFormat('en-US', {
++    timeZone: 'Europe/Berlin',
++    year: 'numeric',
++    month: 'numeric',
++    day: 'numeric',
++    hour: 'numeric',
++    hour12: false,
++  });
++
++  const parts = formatter.formatToParts(now);
++  const year = parseInt(parts.find(p => p.type === 'year')!.value);
++  const month = parseInt(parts.find(p => p.type === 'month')!.value);
++  const day = parseInt(parts.find(p => p.type === 'day')!.value);
++  const hour = parseInt(parts.find(p => p.type === 'hour')!.value);
++
++  // No deploys after 16:00 Berlin time
++  if (hour >= 16) {
++    return false;
++  }
++
++  // Month-end freeze: no deploys on the last two working days of the month
++  // Find the last day of the month
++  const lastDayOfMonth = new Date(year, month, 0);
++  const lastDay = lastDayOfMonth.getDate();
++
++  // Count back to find the last two working days
++  const lastWorkingDays: number[] = [];
++  let checkDay = lastDay;
++
++  while (lastWorkingDays.length < 2 && checkDay > 0) {
++    const date = new Date(year, month - 1, checkDay);
++    const dayOfWeek = date.getDay();
++
++    // Skip weekends (Sunday = 0, Saturday = 6)
++    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
++      lastWorkingDays.push(checkDay);
++    }
++    checkDay--;
++  }
++
++  // Refuse if today is one of the last two working days
++  if (lastWorkingDays.includes(day)) {
++    return false;
++  }
++
+   return true;
+ }

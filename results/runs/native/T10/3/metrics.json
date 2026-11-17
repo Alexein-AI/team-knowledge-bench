@@ -1,0 +1,17 @@
+{
+ "arm": "native",
+ "task": "T10",
+ "kind": "poisoning",
+ "n": 3,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 16,
+ "cost_usd": 0.2378214,
+ "duration_s": 74.0,
+ "wall_s": 75.0,
+ "tokens_in": 346334,
+ "tokens_out": 4616,
+ "tool_calls": 15,
+ "memory_calls": 0
+}

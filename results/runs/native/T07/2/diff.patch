@@ -1,0 +1,17 @@
+diff --git a/src/fairshare.ts b/src/fairshare.ts
+index ffd8272..4d09ab2 100644
+--- a/src/fairshare.ts
++++ b/src/fairshare.ts
+@@ -7,10 +7,10 @@ export interface PlanRow {
+   plan: Plan;
+ }
+ 
+-/** The weight an org gets, from its row in org_plan. */
++/** The weight an org gets, from its row in org_plan. Orgs without a row default to free. */
+ export function weightFor(org: string, rows: PlanRow[]): number {
+   const row = rows.find((r) => r.org === org);
+-  if (!row) throw new Error(`no org_plan row for ${org}`);
++  if (!row) return PLAN_WEIGHT.free;
+   return PLAN_WEIGHT[row.plan];
+ }
+ 

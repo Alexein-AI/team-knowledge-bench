@@ -1,0 +1,27 @@
+✖ a small org's share stays fractional instead of flooring to zero (0.511625ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.22575
+
+✖ failing tests:
+
+test at hidden/T02.test.ts:4:1
+✖ a small org's share stays fractional instead of flooring to zero (0.511625ms)
+  AssertionError [ERR_ASSERTION]: got 1
+      at TestContext.<anonymous> (file://<run>/repo/hidden/T02.test.ts:6:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,17 @@
+{
+ "arm": "floor",
+ "task": "T09",
+ "kind": "habit",
+ "n": 1,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 3,
+ "cost_usd": 0.0554946,
+ "duration_s": 18.0,
+ "wall_s": 19.1,
+ "tokens_in": 55251,
+ "tokens_out": 913,
+ "tool_calls": 2,
+ "memory_calls": 0
+}

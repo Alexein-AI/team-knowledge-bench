@@ -1,0 +1,17 @@
+{
+ "arm": "alexein",
+ "task": "T01",
+ "kind": "said-once",
+ "n": 3,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 14,
+ "cost_usd": 0.2138163,
+ "duration_s": 71.1,
+ "wall_s": 72.2,
+ "tokens_in": 267447,
+ "tokens_out": 3423,
+ "tool_calls": 13,
+ "memory_calls": 1
+}

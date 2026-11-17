@@ -1,0 +1,21 @@
+✖ prebaked images are the production path and the warm pool is gone (0.246792ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53.956208
+
+✖ failing tests:
+
+test at hidden/T08.test.ts:4:1
+✖ prebaked images are the production path and the warm pool is gone (0.246792ms)
+  Error: not decided
+      at Module.chooseColdStart (file://<run>/repo/src/boot.ts:20:9)
+      at TestContext.<anonymous> (file://<run>/repo/hidden/T08.test.ts:5:21)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

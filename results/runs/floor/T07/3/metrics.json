@@ -1,0 +1,17 @@
+{
+ "arm": "floor",
+ "task": "T07",
+ "kind": "superseded",
+ "n": 3,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 10,
+ "cost_usd": 0.13693439999999998,
+ "duration_s": 48.7,
+ "wall_s": 49.6,
+ "tokens_in": 199900,
+ "tokens_out": 2327,
+ "tool_calls": 9,
+ "memory_calls": 0
+}

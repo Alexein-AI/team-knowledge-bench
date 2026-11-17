@@ -1,0 +1,14 @@
+diff --git a/src/lease.ts b/src/lease.ts
+index 813494e..d785710 100644
+--- a/src/lease.ts
++++ b/src/lease.ts
+@@ -4,6 +4,9 @@ export interface Lease {
+   expiresAt: number;
+ }
+ 
++/** How often a running job renews its lease (30 seconds). */
++export const RENEW_INTERVAL_MS = 30_000;
++
+ /** Calls `renew` on a timer for as long as the job runs; returns a stop function. */
+ export function startRenewal(renew: () => void): () => void {
+   const timer = setInterval(renew, RENEW_INTERVAL_MS);

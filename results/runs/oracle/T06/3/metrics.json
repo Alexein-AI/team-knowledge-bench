@@ -1,0 +1,17 @@
+{
+ "arm": "oracle",
+ "task": "T06",
+ "kind": "cross-tool",
+ "n": 3,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 9,
+ "cost_usd": 0.1203684,
+ "duration_s": 36.4,
+ "wall_s": 37.5,
+ "tokens_in": 158884,
+ "tokens_out": 2156,
+ "tool_calls": 8,
+ "memory_calls": 0
+}

@@ -1,0 +1,7 @@
+{
+  "name": "kiln-scheduler",
+  "private": true,
+  "type": "module",
+  "description": "Kiln's job scheduler: fair share, leases, placement and the deploy bot's guard.",
+  "scripts": { "test": "node --test \"test/**/*.test.ts\"" }
+}

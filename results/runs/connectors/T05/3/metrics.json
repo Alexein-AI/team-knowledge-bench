@@ -1,0 +1,17 @@
+{
+ "arm": "connectors",
+ "task": "T05",
+ "kind": "cross-tool",
+ "n": 3,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 4,
+ "cost_usd": 0.058312199999999995,
+ "duration_s": 14.1,
+ "wall_s": 16.7,
+ "tokens_in": 75172,
+ "tokens_out": 617,
+ "tool_calls": 3,
+ "memory_calls": 0
+}

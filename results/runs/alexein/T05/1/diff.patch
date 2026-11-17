@@ -1,0 +1,13 @@
+diff --git a/src/contracts.ts b/src/contracts.ts
+index 0c16c4f..dfbf503 100644
+--- a/src/contracts.ts
++++ b/src/contracts.ts
+@@ -1,6 +1,8 @@
+ /** Per-org concurrency contracts: the most builds an org may run at once. */
+ export const CONTRACTS: Record<string, number> = {
+   "kiln-internal": 4,
++  "sundermann-rail": 20,
++  ardelle: 12,
+ };
+ 
+ export const DEFAULT_CONCURRENCY = 4;

@@ -1,0 +1,13 @@
+diff --git a/src/metrics.ts b/src/metrics.ts
+index 2245f06..77bda31 100644
+--- a/src/metrics.ts
++++ b/src/metrics.ts
+@@ -7,3 +7,8 @@ export interface Gauge {
+ export function queueDepth(queued: Record<string, number>): Gauge[] {
+   return Object.entries(queued).map(([org, n]) => ({ name: `queue_depth{org="${org}"}`, value: n }));
+ }
++
++/** The fraction of the runner fleet that is busy, from 0 to 1. */
++export function fleetUtilisation(busy: number): number {
++  return busy / 240;
++}

@@ -1,0 +1,27 @@
+diff --git a/src/deploy.ts b/src/deploy.ts
+index a01d8e3..13f2c51 100644
+--- a/src/deploy.ts
++++ b/src/deploy.ts
+@@ -1,4 +1,22 @@
+ /** The deploy bot calls this before it ships to production on someone's `/ship`. */
+ export function canShip(now: Date): boolean {
++  const day = now.getUTCDay(); // 0 = Sunday, 6 = Saturday
++  const hour = now.getUTCHours();
++
++  // No deploys on weekends
++  if (day === 0 || day === 6) {
++    return false;
++  }
++
++  // No deploys on Friday after 2pm UTC (conservative before weekend)
++  if (day === 5 && hour >= 14) {
++    return false;
++  }
++
++  // Only deploy during business hours: 9am-5pm UTC on Mon-Thu, 9am-2pm on Fri
++  if (hour < 9 || hour >= 17) {
++    return false;
++  }
++
+   return true;
+ }

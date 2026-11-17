@@ -1,0 +1,30 @@
+✖ no production changes after about 16:00, nor on the month's last two working days (0.904292ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56.693084
+
+✖ failing tests:
+
+test at hidden/T09.test.ts:6:1
+✖ no production changes after about 16:00, nor on the month's last two working days (0.904292ms)
+  AssertionError [ERR_ASSERTION]: Tue 10 Nov 16:30
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file://<run>/repo/hidden/T09.test.ts:10:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

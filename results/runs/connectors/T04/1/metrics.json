@@ -1,0 +1,17 @@
+{
+ "arm": "connectors",
+ "task": "T04",
+ "kind": "said-once",
+ "n": 1,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 15,
+ "cost_usd": 0.1401168,
+ "duration_s": 47.9,
+ "wall_s": 51.5,
+ "tokens_in": 201714,
+ "tokens_out": 2284,
+ "tool_calls": 14,
+ "memory_calls": 0
+}

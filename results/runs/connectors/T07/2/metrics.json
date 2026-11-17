@@ -1,0 +1,17 @@
+{
+ "arm": "connectors",
+ "task": "T07",
+ "kind": "superseded",
+ "n": 2,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 8,
+ "cost_usd": 0.11900580000000001,
+ "duration_s": 35.4,
+ "wall_s": 37.9,
+ "tokens_in": 160330,
+ "tokens_out": 1999,
+ "tool_calls": 7,
+ "memory_calls": 0
+}

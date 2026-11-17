@@ -1,0 +1,15 @@
+diff --git a/src/admission.ts b/src/admission.ts
+index 66e1ae4..305a62a 100644
+--- a/src/admission.ts
++++ b/src/admission.ts
+@@ -9,5 +9,9 @@ export interface OrgLoad {
+ 
+ /** The per-org queue-depth fuse: whether to refuse a new enqueue from this org. */
+ export function refuseEnqueue(load: OrgLoad): boolean {
+-  return false;
++  // Cap derived from guaranteed throughput: at the org's share and a 5-minute
++  // median build, an hour of queue is share × 12. Over that, the org's own
++  // guaranteed concurrency would take longer to drain than anyone is willing to wait.
++  const cap = load.share * 12;
++  return load.queued >= cap;
+ }

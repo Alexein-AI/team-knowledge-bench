@@ -1,0 +1,41 @@
+diff --git a/README.md b/README.md
+index a244cc8..75ad66e 100644
+--- a/README.md
++++ b/README.md
+@@ -4,6 +4,7 @@ Places queued CI jobs on Kiln's runner fleet.
+ 
+ - `src/fairshare.ts` - each org's share of the fleet, from its plan's weight
+ - `src/lease.ts` - a claimed job holds a lease and renews it while it runs
++- `src/admission.ts` - whether a new enqueue is accepted
+ - `src/contracts.ts` - per-org concurrency contracts
+ - `src/alerts.ts` - paging rules for the dispatcher
+ - `src/ratelimit.ts` - rate-limit headers on the API's 429s
+diff --git a/src/admission.ts b/src/admission.ts
+new file mode 100644
+index 0000000..66e1ae4
+--- /dev/null
++++ b/src/admission.ts
+@@ -0,0 +1,13 @@
++export interface OrgLoad {
++  /** Jobs this org has waiting in the queue. */
++  queued: number;
++  /** Jobs this org has running now. */
++  running: number;
++  /** Machines this org is owed right now (fairshare.shareOf). */
++  share: number;
++}
++
++/** The per-org queue-depth fuse: whether to refuse a new enqueue from this org. */
++export function refuseEnqueue(load: OrgLoad): boolean {
++  return false;
++}
+diff --git a/src/lease.ts b/src/lease.ts
+index 813494e..63c0824 100644
+--- a/src/lease.ts
++++ b/src/lease.ts
+@@ -1,3 +1,5 @@
++export const RENEW_INTERVAL_MS = 30_000;
++
+ export interface Lease {
+   id: string;
+   org: string;

@@ -1,0 +1,17 @@
+{
+ "arm": "floor",
+ "task": "T02",
+ "kind": "said-once",
+ "n": 3,
+ "pass": false,
+ "error": false,
+ "subtype": "success",
+ "turns": 4,
+ "cost_usd": 0.055953300000000004,
+ "duration_s": 18.9,
+ "wall_s": 19.8,
+ "tokens_in": 55803,
+ "tokens_out": 882,
+ "tool_calls": 3,
+ "memory_calls": 0
+}

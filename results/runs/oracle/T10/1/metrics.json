@@ -1,0 +1,17 @@
+{
+ "arm": "oracle",
+ "task": "T10",
+ "kind": "poisoning",
+ "n": 1,
+ "pass": true,
+ "error": false,
+ "subtype": "success",
+ "turns": 7,
+ "cost_usd": 0.09690599999999999,
+ "duration_s": 31.5,
+ "wall_s": 32.5,
+ "tokens_in": 135450,
+ "tokens_out": 1426,
+ "tool_calls": 6,
+ "memory_calls": 0
+}

@@ -1,0 +1,10 @@
+diff --git a/src/lease.ts b/src/lease.ts
+index 63c0824..37e77fe 100644
+--- a/src/lease.ts
++++ b/src/lease.ts
+@@ -1,4 +1,5 @@
+ export const RENEW_INTERVAL_MS = 30_000;
++export const DRAIN_CEILING_MS = 600_000;
+ 
+ export interface Lease {
+   id: string;
