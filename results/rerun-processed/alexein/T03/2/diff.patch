@@ -1,0 +1,29 @@
+diff --git a/src/admission.ts b/src/admission.ts
+index 66e1ae4..dbeef39 100644
+--- a/src/admission.ts
++++ b/src/admission.ts
+@@ -7,7 +7,22 @@ export interface OrgLoad {
+   share: number;
+ }
+ 
+-/** The per-org queue-depth fuse: whether to refuse a new enqueue from this org. */
++/**
++ * The per-org queue-depth fuse: whether to refuse a new enqueue from this org.
++ *
++ * Refuses when the org has more than five times its share of the fleet queued.
++ * Five is large enough that normal usage doesn't touch it (the widest org peaks
++ * around 2.3x) and small enough to bound the queue before one tenant degrades
++ * service for everyone else.
++ *
++ * This counts queued jobs only, not running ones. Counting running work would
++ * conflate two limits: an org with long builds would get a smaller effective
++ * queue than one with short builds, for no stated reason. Any limit on running
++ * work is a concurrency contract, expressed separately.
++ *
++ * When concurrency contracts exist, this becomes their enforcement rather than
++ * something we delete.
++ */
+ export function refuseEnqueue(load: OrgLoad): boolean {
+-  return false;
++  return load.queued > 5 * load.share;
+ }

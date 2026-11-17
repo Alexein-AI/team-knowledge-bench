@@ -242,8 +242,8 @@ def table(runs: Path) -> None:
         pois = [r for r in rows if r["arm"] == a and r["kind"] == "poisoning" and not r["error"]]
         cost = [r["cost_usd"] for r in rs if r["cost_usd"] is not None]
         passed = sum(r["pass"] for r in rs if not r["error"])
-        gap = (p - floor) / (oracle - floor) if oracle != floor else float("nan")
-        print(f"| {a} | {p:.0%} ({passed}/{n}) | {'-' if a in ('floor', 'oracle') else f'{gap:.0%}'} | "
+        gap = (p - floor) / (oracle - floor) if oracle == oracle and floor == floor and oracle != floor else None
+        print(f"| {a} | {p:.0%} ({passed}/{n}) | {'-' if a in ('floor', 'oracle') or gap is None else f'{gap:.0%}'} | "
               f"{sum(r['pass'] for r in pois)}/{len(pois)} | ${statistics.median(cost):.3f} | "
               f"${(sum(cost) / passed) if passed else float('inf'):.3f} | {statistics.median(r['turns'] or 0 for r in rs):.0f} | "
               f"{statistics.median(r['duration_s'] for r in rs):.0f}s | {errs} |")

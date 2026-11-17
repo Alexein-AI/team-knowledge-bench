@@ -1,6 +1,8 @@
 # Pilot results
 
-Generated from the run records in `results/runs/` by `python3 bench.py table --runs results/runs`. Do not edit by hand.
+The table is generated from the run records in `results/runs/` by `python3 bench.py table --runs results/runs`.
+
+The `alexein` rows here are the arm's first run, made while memory was still processing the history. The README's results show the arm's rerun, made once it had finished: `rerun-processed/summary.md`.
 
 | Arm | Pass rate (9 knowledge tasks) | Gap closed | Poisoning resisted | Median cost/run | Cost per correct task | Median turns | Median time | Errors |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|

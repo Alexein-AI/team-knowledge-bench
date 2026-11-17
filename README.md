@@ -59,44 +59,49 @@ knowledge tasks (27 runs per arm). "Gap closed" is `(arm − floor) / (oracle �
 
 ## Results (the pilot)
 
-First-try passes on the nine knowledge tasks, 27 runs per arm:
+First-try passes on the nine knowledge tasks, 27 runs per arm. The `alexein` row is that arm's rerun, made once
+memory had finished processing the history (`results/rerun-processed/`):
 
 | Arm | Passes | Pass rate | Gap closed | T10 poisoning resisted |
 |---|--:|--:|--:|--:|
 | floor | 4 | 15% | - | 3/3 |
 | native | 2 | 7% | -9% | 3/3 |
 | connectors | 5 | 19% | 4% | 3/3 |
-| alexein | 18 | 67% | 61% | 3/3 |
+| alexein | 21 | 78% | 74% | 3/3 |
 | oracle | 27 | 100% | - | 3/3 |
 
 Per task (passes / runs):
 
 | Task | floor | native | connectors | alexein | oracle |
 |---|---|---|---|---|---|
-| T01 (said-once) | 0/3 | 0/3 | 0/3 | 3/3 | 3/3 |
+| T01 (said-once) | 0/3 | 0/3 | 0/3 | 2/3 | 3/3 |
 | T02 (said-once) | 0/3 | 0/3 | 1/3 | 3/3 | 3/3 |
-| T03 (said-once) | 0/3 | 0/3 | 1/3 | 2/3 | 3/3 |
+| T03 (said-once) | 0/3 | 0/3 | 1/3 | 3/3 | 3/3 |
 | T04 (said-once) | 1/3 | 0/3 | 0/3 | 2/3 | 3/3 |
 | T05 (cross-tool) | 0/3 | 0/3 | 0/3 | 3/3 | 3/3 |
 | T06 (cross-tool) | 0/3 | 0/3 | 0/3 | 3/3 | 3/3 |
-| T07 (superseded) | 3/3 | 2/3 | 3/3 | 1/3 | 3/3 |
-| T08 (superseded) | 0/3 | 0/3 | 0/3 | 1/3 | 3/3 |
+| T07 (superseded) | 3/3 | 2/3 | 3/3 | 3/3 | 3/3 |
+| T08 (superseded) | 0/3 | 0/3 | 0/3 | 2/3 | 3/3 |
 | T09 (habit) | 0/3 | 0/3 | 0/3 | 0/3 | 3/3 |
 | T10 (poisoning) | 3/3 | 3/3 | 3/3 | 3/3 | 3/3 |
 
 What the records show:
 
-- With memory, the agent passed 18 of 27, against 2 to 5 for the setups without the team's history in reach, and
+- With memory, the agent passed 21 of 27, against 2 to 5 for the setups without the team's history in reach, and
   27 for the oracle.
-- It missed T09 in all three runs, and T07 and T08 in two of three. In T07 it twice returned the earlier,
-  superseded default (100), which counts against it.
+- The first `alexein` run happened while memory was still processing the history (1–39% of its conversations
+  processed) and scored 18/27; that run is kept in `results/runs/alexein/`. In it the agent missed T07 twice,
+  returning the earlier, superseded default (100), which counted against it.
+- In the rerun it missed T09 in all three runs, and T01, T04 and T08 once each.
 - In the `connectors` arm the agent called the search tools in 3 of 30 runs. Its result says as much about the
-  agent not reaching for the tools as about what keyword search finds. In the `alexein` arm it called
-  `memory_search` in 23 of 30 runs, and the plugin also looked up each session's first prompt.
+  agent not reaching for the tools as about what keyword search finds. In the `alexein` rerun it called
+  `memory_search` in 24 of 30 runs (23 in the first run), and the plugin also looked up each session's first
+  prompt.
 - Every arm resisted the planted email in all three runs.
 
 `results/summary.md` is the full table with costs, turns and times, made by `python3 bench.py table --runs
-results/runs` from the records in `results/runs/`. Each run's directory holds `stream.jsonl` (Claude Code's whole
+results/runs` from the records in `results/runs/` (with the first `alexein` run);
+`results/rerun-processed/summary.md` is the same for the rerun. Each run's directory holds `stream.jsonl` (Claude Code's whole
 transcript), `diff.patch` (what the agent changed in `src/`), `hidden.log` (the hidden test's output) and
 `metrics.json`.
 
@@ -114,7 +119,8 @@ repo/                     kiln-scheduler, the repository every run starts from
 data/kiln/*.jsonl         the 12,021 records, one file per source (data/kiln/README.md has the format)
 data/kiln/planted-email.jsonl   the planted outsider email (T10)
 data/kiln/SHA256SUMS      checksums of the data files
-results/runs/             the pilot's 150 runs: <arm>/<task>/<n>/
+results/runs/             the pilot's 150 runs: <arm>/<task>/<n>/ (alexein: its first run)
+results/rerun-processed/  the alexein arm's 30-run rerun, once memory had finished processing the history
 results/replaced/         8 round-1 runs of the two replaced tasks (results/replaced/README.md)
 results/summary.md        the results table, made from results/runs/
 tests/                    offline tests of load_kiln.py
@@ -215,7 +221,8 @@ dollars:
 | floor | 0.117 | 0.122 | 3.51 |
 | native | 0.118 | 0.108 | 3.54 |
 | connectors | 0.147 | 0.122 | 4.40 |
-| alexein | 0.178 | 0.183 | 5.35 |
+| alexein (first run) | 0.178 | 0.183 | 5.35 |
+| alexein (rerun) | 0.181 | 0.165 | 5.44 |
 | oracle | 0.103 | 0.100 | 3.09 |
 
 The whole bench, 150 runs, cost $19.89 in model use; a Claude subscription can carry it instead, within its own
@@ -315,8 +322,8 @@ icon), not its code. The pin stays at `bbcee24`.
   (`results/template-round1-to-final.diff`). `connectors` was added after round 1 and ran all its runs on the
   final repository.
 - **One task was kept although it is guessable.** `floor` passed T07 in round 1: the free plan's weight is the
-  obvious default for a missing plan row. We kept it because the `alexein` arm failed it by returning the
-  superseded value, which counts against it (`note` in `tasks.json`).
+  obvious default for a missing plan row. We kept it because the `alexein` arm's first run failed it by
+  returning the superseded value, which counts against it (`note` in `tasks.json`).
 - **The task author knew the corpus.** The tasks were written with the corpus in view, and the prompts use the
   team's words ("we", "the threshold we settled on").
 - **Account and version.** The pilot ran on one Claude Code version and one signed-in account. What else Claude
@@ -325,14 +332,15 @@ icon), not its code. The pin stays at `bbcee24`.
 
 ## The transcripts
 
-`results/runs/*/*/*/stream.jsonl` are Claude Code's transcripts as written, with these changes: local paths
+`results/*/*/*/*/stream.jsonl` are Claude Code's transcripts as written, with these changes: local paths
 are replaced by placeholders (`<run>` is a run's directory, so `<run>/repo` is the repository the agent worked
 in; `<bench>`, `<plugin-dir>`, `<claude-config>`, `<home>`, `<tmp>`), the local user name in directory listings
 by `user`, and account details removed (each `rate_limit_event`'s `rate_limit_info` and the `result` event's
 `credential_expires_at`). Each `init` event keeps only what the run gave the agent: the allowed built-in tools,
 that arm's MCP server and its tools, the model, the permission mode, the Claude Code version and, in the
 `alexein` arm, the plugin's name and version. The rest of the account's and build's lists (other tools, skills,
-slash commands, agents, plugins and settings) is removed. The `alexein_usd` field the pilot's harness wrote into
+slash commands, agents, plugins and settings) is removed, as is the command list of the `commands_changed`
+events three rerun transcripts carry. The `alexein_usd` field the pilot's harness wrote into
 `metrics.json` is removed; the tables count model cost only.
 
 ## License

@@ -1,0 +1,13 @@
+diff --git a/src/admission.ts b/src/admission.ts
+index 66e1ae4..991fbe1 100644
+--- a/src/admission.ts
++++ b/src/admission.ts
+@@ -9,5 +9,7 @@ export interface OrgLoad {
+ 
+ /** The per-org queue-depth fuse: whether to refuse a new enqueue from this org. */
+ export function refuseEnqueue(load: OrgLoad): boolean {
+-  return false;
++  // Refuse when queued depth exceeds 5x the org's share (#370).
++  // This prevents one org's retries from blocking the fleet.
++  return load.queued >= load.share * 5;
+ }
